@@ -3,61 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>NubridgeMD for Clinics</title>
+<title>NuBridgeMD for Clinics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Layout: hero with a clinic→roster→one-payment diagram, then benefits, steps, pricing, CTA — scoped under .nbc for drop-in reuse */
+  /* NuBridgeMD brand — navy #032748, blue #0889FC, pink #FC2A69. Committed light treatment (brand lives on white). */
   :root{
-    --navy:#0b2545; --navy-2:#13355c; --teal:#108f86; --teal-dk:#0c6f68; --gold:#c0882b; --gold-2:#dcab4c;
-    --ink:#122134; --body:#3b4a5c; --muted:#6a7889; --line:#e3eaf2; --soft:#f3f7fc; --bg:#ffffff; --card:#ffffff;
-    --shadow:0 12px 34px rgba(11,37,69,.10); --shadow-sm:0 4px 14px rgba(11,37,69,.07);
+    color-scheme:light;
+    --navy:#032748; --navy-2:#0a3a63; --blue:#0889fc; --blue-dk:#0670d8; --pink:#fc2a69;
+    --ink:#0a2744; --body:#41526a; --muted:#6a7a90; --line:#e2e9f3; --soft:#eef4fd; --bg:#ffffff; --card:#ffffff;
+    --shadow:0 14px 36px rgba(3,39,72,.12); --shadow-sm:0 4px 14px rgba(3,39,72,.08);
     --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     --disp:"Montserrat",var(--sans);
-  }
-  :root:not([data-theme="light"]){ color-scheme:light; }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      color-scheme:dark;
-      --navy:#9fc6ff; --navy-2:#7fb0f5; --teal:#4fd6cb; --teal-dk:#36bdb2; --gold:#e8c06a; --gold-2:#f0cf86;
-      --ink:#eaf1fb; --body:#c0ccda; --muted:#8c9bae; --line:#243546; --soft:#13202e; --bg:#0a1623; --card:#10202f;
-      --shadow:0 14px 38px rgba(0,0,0,.42); --shadow-sm:0 4px 16px rgba(0,0,0,.34);
-    }
-  }
-  :root[data-theme="dark"]{
-    color-scheme:dark;
-    --navy:#9fc6ff; --navy-2:#7fb0f5; --teal:#4fd6cb; --teal-dk:#36bdb2; --gold:#e8c06a; --gold-2:#f0cf86;
-    --ink:#eaf1fb; --body:#c0ccda; --muted:#8c9bae; --line:#243546; --soft:#13202e; --bg:#0a1623; --card:#10202f;
-    --shadow:0 14px 38px rgba(0,0,0,.42); --shadow-sm:0 4px 16px rgba(0,0,0,.34);
   }
   body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
   .nbc{max-width:1060px;margin:0 auto;padding-inline:20px;}
   .nbc h1,.nbc h2,.nbc h3,.nbc .eyebrow{font-family:var(--disp);color:var(--ink);text-wrap:balance;}
   .nbc p{margin:0 0 14px;}
   .nbc a{color:inherit;}
-  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:0 0 14px;}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 14px;}
 
-  /* mark */
-  .brand{display:flex;align-items:center;gap:11px;padding:22px 0 0;}
-  .brand .logo{width:38px;height:38px;flex:0 0 auto;}
-  .brand .wm{font-family:var(--disp);font-weight:800;font-size:19px;color:var(--ink);letter-spacing:-.01em;}
-  .brand .wm span{color:var(--teal);}
-  .brand .tag{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;}
+  .brand{display:flex;align-items:center;gap:14px;padding:22px 0 0;flex-wrap:wrap;}
+  .brand img{height:38px;width:auto;display:block;}
+  .brand .tag{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;font-family:var(--disp);text-transform:uppercase;}
 
-  /* hero */
   .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:44px 30px;}
   .hero h1{font-size:clamp(30px,5vw,48px);font-weight:800;line-height:1.08;letter-spacing:-.018em;margin:0 0 18px;}
-  .hero h1 em{font-style:normal;color:var(--teal);}
+  .hero h1 em{font-style:normal;color:var(--pink);}
   .hero .lead{font-size:clamp(16px,2.1vw,19px);color:var(--body);max-width:42ch;margin:0 0 24px;}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
   .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:700;font-size:15px;text-decoration:none;border-radius:11px;padding:13px 22px;transition:transform .15s ease,box-shadow .15s ease;}
-  .btn.primary{background:linear-gradient(135deg,var(--teal),var(--teal-dk));color:#fff;box-shadow:var(--shadow-sm);}
-  :root[data-theme="dark"] .btn.primary,:root:not([data-theme="light"]) .btn.primary{color:#07131d;}
-  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff;}}
-  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dk));color:#fff;box-shadow:0 8px 20px rgba(8,137,252,.28);}
+  .btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line);}
   .btn:hover{transform:translateY(-2px);}
-  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+  .btn:focus-visible{outline:3px solid var(--pink);outline-offset:2px;}
   .micro{font-size:13.5px;color:var(--muted);margin:16px 0 0;}
   .micro b{color:var(--ink);font-weight:700;}
 
@@ -65,51 +45,42 @@
   .diagram svg{width:100%;height:auto;display:block;}
   .diagram .cap{font-size:12.5px;color:var(--muted);text-align:center;margin:12px 2px 0;}
 
-  /* section shell */
   section{padding-block:34px;}
   .sec-head{max-width:60ch;margin:0 0 24px;}
   .sec-head h2{font-size:clamp(22px,3.3vw,30px);font-weight:800;letter-spacing:-.01em;margin:0 0 10px;}
   .sec-head p{color:var(--body);margin:0;}
 
-  /* benefits */
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;box-shadow:var(--shadow-sm);}
-  .card .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--teal) 15%,transparent);color:var(--teal);margin:0 0 14px;}
+  .card .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(8,137,252,.12);color:var(--blue);margin:0 0 14px;}
   .card h3{font-size:17.5px;font-weight:700;margin:0 0 7px;color:var(--ink);}
   .card p{font-size:14.5px;margin:0;color:var(--body);}
 
-  /* steps */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s;}
   .step{position:relative;padding:24px 20px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line);}
-  .step .n{counter-increment:s;font-family:var(--disp);font-weight:800;font-size:14px;color:#fff;background:var(--navy-2);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;margin:0 0 12px;}
-  :root[data-theme="dark"] .step .n,:root:not([data-theme="light"]) .step .n{color:#07131d;}
-  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .step .n{color:#fff;}}
+  .step .n{counter-increment:s;font-family:var(--disp);font-weight:800;font-size:14px;color:#fff;background:var(--navy);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;margin:0 0 12px;}
   .step .n::before{content:counter(s);}
   .step h3{font-size:16px;font-weight:700;margin:0 0 6px;color:var(--ink);}
   .step p{font-size:14px;margin:0;color:var(--body);}
 
-  /* pricing */
-  .price{background:linear-gradient(160deg,var(--navy),var(--navy-2));border-radius:20px;padding:34px;color:#eaf2ff;box-shadow:var(--shadow);}
-  :root[data-theme="dark"] .price,:root:not([data-theme="light"]) .price{background:linear-gradient(160deg,#0c1f31,#12304a);border:1px solid var(--line);}
-  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .price{background:linear-gradient(160deg,var(--navy),var(--navy-2));}}
+  .price{background:linear-gradient(155deg,var(--navy),var(--navy-2));border-radius:20px;padding:34px;color:#eaf3ff;box-shadow:var(--shadow);}
   .price h2{color:#fff;font-size:clamp(21px,3vw,27px);margin:0 0 6px;}
-  .price .sub{color:#b9cde8;font-size:15px;margin:0 0 24px;max-width:62ch;}
+  .price .sub{color:#b4ccea;font-size:15px;margin:0 0 24px;max-width:62ch;}
   .price-split{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
-  .pcard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:20px;}
-  .pcard .lbl{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2);margin:0 0 14px;}
+  .pcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:20px;}
+  .pcard .lbl{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--pink);margin:0 0 14px;}
   .bands{list-style:none;margin:0;padding:0;}
-  .bands li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:15px;color:#dfeaf8;}
+  .bands li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:15px;color:#dce8f8;}
   .bands li:last-child{border-bottom:0;}
   .bands li b{font-family:var(--disp);color:#fff;font-weight:700;font-variant-numeric:tabular-nums;}
-  .pnote{font-size:12.5px;color:#9fb6d6;margin:16px 0 0;}
+  .pnote{font-size:12.5px;color:#90aace;margin:16px 0 0;}
 
-  /* cta band */
   .cta-band{text-align:center;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:40px 26px;}
   .cta-band h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 10px;}
   .cta-band p{max-width:52ch;margin:0 auto 22px;color:var(--body);}
 
   footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 40px;line-height:1.7;}
-  footer a{color:var(--teal);text-decoration:none;font-weight:600;}
+  footer a{color:var(--blue);text-decoration:none;font-weight:600;}
 
   @media (max-width:860px){
     .hero{grid-template-columns:1fr;gap:28px;}
@@ -127,13 +98,7 @@
 
 <div class="nbc">
   <div class="brand">
-    <svg class="logo" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="var(--navy)"/>
-      <path d="M9 30c3.5 0 4-9 7.5-9s4 9 7.5 9 4-13 7.5-13 4 13 7.5 13" stroke="var(--teal)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M9 36h30" stroke="var(--gold-2)" stroke-width="2.4" stroke-linecap="round"/>
-      <circle cx="14" cy="36" r="2.6" fill="var(--gold-2)"/><circle cx="34" cy="36" r="2.6" fill="var(--gold-2)"/>
-    </svg>
-    <div class="wm">Nubridge<span>MD</span></div>
+    <img src="NubridgeMD-logo.png" alt="NuBridgeMD — Empowering Care">
     <div class="tag">for Clinics &amp; Group Practices</div>
   </div>
 
@@ -141,7 +106,7 @@
     <div>
       <p class="eyebrow">Clinic &amp; Group‑Practice Accounts</p>
       <h1>One account for your whole team. <em>One payment.</em></h1>
-      <p class="lead">A clinic administrator manages every nurse practitioner under a single NubridgeMD account and pays once by bank transfer — no chasing individual sign‑ups, no juggling separate checkouts.</p>
+      <p class="lead">A clinic administrator manages every nurse practitioner under a single NuBridgeMD account and pays once by bank transfer — no chasing individual sign‑ups, no juggling separate checkouts.</p>
       <div class="cta-row">
         <a class="btn primary" href="https://nubridgemd.com" target="_blank" rel="noopener">Get started for your clinic
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -153,25 +118,20 @@
 
     <div class="diagram" aria-label="How clinic billing consolidates">
       <svg viewBox="0 0 360 232" role="img" aria-label="One clinic admin manages many nurse practitioners and pays through a single ACH payment">
-        <!-- admin -->
-        <rect x="118" y="12" width="124" height="40" rx="10" fill="var(--soft)" stroke="var(--navy-2)" stroke-width="1.5"/>
+        <rect x="118" y="12" width="124" height="40" rx="10" fill="var(--soft)" stroke="var(--navy)" stroke-width="1.5"/>
         <text x="180" y="30" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Clinic Admin</text>
         <text x="180" y="44" text-anchor="middle" font-family="Source Sans 3,sans-serif" font-size="10.5" fill="var(--muted)">one login</text>
-        <!-- connectors to NPs -->
         <path d="M180 52v16M180 68H60v12M180 68h120v12M180 68v12" stroke="var(--line)" stroke-width="1.6" fill="none"/>
-        <!-- NP nodes -->
         <g font-family="Source Sans 3,sans-serif" font-size="10.5" fill="var(--ink)" text-anchor="middle">
           <rect x="24" y="80" width="72" height="30" rx="8" fill="var(--card)" stroke="var(--line)" stroke-width="1.4"/><text x="60" y="99">NP</text>
           <rect x="144" y="80" width="72" height="30" rx="8" fill="var(--card)" stroke="var(--line)" stroke-width="1.4"/><text x="180" y="99">NP</text>
           <rect x="264" y="80" width="72" height="30" rx="8" fill="var(--card)" stroke="var(--line)" stroke-width="1.4"/><text x="300" y="99">NP</text>
         </g>
         <text x="180" y="128" text-anchor="middle" font-family="Source Sans 3,sans-serif" font-size="10.5" fill="var(--muted)">add by detail or email invite · roster in one dashboard</text>
-        <!-- funnel arrow -->
-        <path d="M180 138v14" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M174 148l6 6 6-6" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- one payment -->
-        <rect x="92" y="162" width="176" height="52" rx="12" fill="color-mix(in srgb,var(--teal) 14%,transparent)" stroke="var(--teal)" stroke-width="1.6"/>
-        <text x="180" y="184" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="800" font-size="14" fill="var(--teal-dk)">One consolidated ACH payment</text>
+        <path d="M180 138v14" stroke="var(--blue)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M174 148l6 6 6-6" stroke="var(--blue)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="92" y="162" width="176" height="52" rx="12" fill="rgba(8,137,252,.1)" stroke="var(--blue)" stroke-width="1.6"/>
+        <text x="180" y="184" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="800" font-size="14" fill="var(--blue-dk)">One consolidated ACH payment</text>
         <text x="180" y="201" text-anchor="middle" font-family="Source Sans 3,sans-serif" font-size="10.5" fill="var(--body)">group registration + each NP's monthly tier</text>
       </svg>
       <p class="cap">Many providers in. One bank payment out.</p>
@@ -230,7 +190,7 @@
             <li>6–10 nurse practitioners <b>$1,000</b></li>
             <li>11+ nurse practitioners <b>$1,500</b></li>
           </ul>
-          <p class="pnote">Charged only on newly‑registered NPs. Providers already registered on NubridgeMD are grandfathered — no second registration fee.</p>
+          <p class="pnote">Charged only on newly‑registered NPs. Providers already registered on NuBridgeMD are grandfathered — no second registration fee.</p>
         </div>
         <div class="pcard">
           <p class="lbl">Per‑NP monthly tier</p>
@@ -247,9 +207,9 @@
 
   <section>
     <div class="cta-band">
-      <p class="eyebrow" style="color:var(--gold)">Get started</p>
+      <p class="eyebrow" style="color:var(--pink)">Get started</p>
       <h2>Cover your whole clinic with one account</h2>
-      <p>Set up your group practice on NubridgeMD and move your nurse practitioners onto a single, simple payment.</p>
+      <p>Set up your group practice on NuBridgeMD and move your nurse practitioners onto a single, simple payment.</p>
       <div class="cta-row" style="justify-content:center">
         <a class="btn primary" href="https://nubridgemd.com" target="_blank" rel="noopener">Create your clinic account
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -259,7 +219,7 @@
   </section>
 
   <footer>
-    NubridgeMD — collaborative care, simplified for clinics and group practices.<br>
+    NuBridgeMD — Empowering Care. Collaborative care, simplified for clinics and group practices.<br>
     Visit <a href="https://nubridgemd.com" target="_blank" rel="noopener">nubridgemd.com</a> · Pricing shown is the current clinic structure and may be updated.
   </footer>
 </div>
